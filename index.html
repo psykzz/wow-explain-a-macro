@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Explain a WoW Macro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Explain a WoW Macro</h1>
+  <p>Paste a macro below and see what it does in plain English.</p>
+  <textarea id="macro" rows="10" cols="60" placeholder="#showtooltip Rend&#10;/startattack&#10;/cast [form:3] Battle Stance&#10;/cast Rend"></textarea>
+  <h2>Explanation</h2>
+  <ul id="output"></ul>
+  <script src="src/macro-parser.js"></script>
+  <script>
+    var input = document.getElementById('macro');
+    var output = document.getElementById('output');
+    function render() {
+      output.textContent = '';
+      MacroParser.explainMacro(input.value).forEach(function (line) {
+        var li = document.createElement('li');
+        li.textContent = line;
+        output.appendChild(li);
+      });
+    }
+    input.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
